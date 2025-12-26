@@ -9,6 +9,6 @@ Install Flask and pyyaml via `pip install flask` and `pip install pyyaml`.
 Get your local IPV4 address via `ipconfig` and put it on client\config.yaml. 
 Then run client\main.py and server\main.py (with 1 or 2 computers).
 
-The website address is http:\\0.0.0.0:8080 by default on the computer which runs server\main.py.
+The website address is [0.0.0.0:8080](http://0.0.0.0:8080/) by default on the computer which runs server\main.py.
 
 
