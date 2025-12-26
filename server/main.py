@@ -1,5 +1,6 @@
 import threading
 import time
+from pathlib import Path
 
 from api.routes import register_routes
 from config.config import AppConfig
@@ -8,9 +9,11 @@ from network.tcp import TcpServer
 
 from flask import Flask
 
+BASE_DIR = str(Path(__file__).parent.resolve())
+CONFIG_PATH = BASE_DIR + r"\config.yaml"
 
 def main():
-    config = AppConfig.load_from_yaml("config.yaml")
+    config = AppConfig.load_from_yaml(CONFIG_PATH)
     led_state = LedState()
     tcp_server = TcpServer(led_state, config.tcp_port)
 
@@ -34,3 +37,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
