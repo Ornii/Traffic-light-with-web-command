@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static',filename='styles/styles.css') }}"
+        />
+
+        <script language="javascript">
+            function changeStateLed(int_green_led_state) {
+                if (int_green_led_state == 0) {
+                    circle_up_led_color.className = "circle_up gray";
+                    circle_down_led_color.className = "circle_down red";
+                }
+
+                if (int_green_led_state == 1) {
+                    circle_up_led_color.className = "circle_up green";
+                    circle_down_led_color.className = "circle_down gray";
+                }
+            }
+
+            function refreshStateLed() {
+                url = "/api/get_state";
+                fetch(url, { method: "GET" })
+                    .then((response) => response.json())
+                    .then((response) => {
+                        if (response.green_led_state == 1) {
+                            changeStateLed(1);
+                        } else {
+                            changeStateLed(0);
+                        }
+                    });
+            }
+
+            function defineStateLed(int_green_led_state) {
+                url = "/api/define_state";
+                if (int_green_led_state == 1) {
+                    message = {
+                        green_led_state: 1,
+                        red_led_state: 0,
+                    };
+                    fetch(url, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(message),
+                    });
+                }
+
+                if (int_green_led_state == 0) {
+                    message = {
+                        green_led_state: 0,
+                        red_led_state: 1,
+                    };
+                    fetch(url, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(message),
+                    });
+                }
+            }
+
+            setInterval(refreshStateLed, 200);
+        </script>
+    </head>
+
+    <body>
+        <input
+            type="button"
+            onclick="defineStateLed(1)"
+            value="Light up green"
+        />
+        <input type="button" onclick="defineStateLed(0)" value="Light up red" />
+
+        <div id="circle_up_led_color" class="circle_up green"></div>
+        <div id="circle_down_led_color" class="circle_down gray"></div>
+    </body>
+</html>

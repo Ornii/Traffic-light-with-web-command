@@ -1,0 +1,31 @@
+.circle_up {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle_up.green {
+    background-color: green;
+}
+
+.circle_up.gray {
+    background-color: gray;
+}
+
+.circle_down {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle_down.red {
+    background-color: red;
+}
+
+.circle_down.gray {
+    background-color: gray;
+}
